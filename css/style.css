@@ -1,0 +1,28 @@
+
+.cpu-analize{
+    width: 400px;
+}
+
+.var{
+    width: auto;
+    height: 30px;
+    background: #a8a8a8;
+    border-radius: 2%;
+    margin: 3px;
+    display: inline;
+}
+
+.name{
+    position: absolute;
+    float: left;
+    left: 2px;
+    bottom: 0;
+    margin: 0;
+    font-size: 8pt;
+}
+
+.value{
+    float: right;
+    padding: 5px 3px 5px 2px;
+    margin: 0;
+}
