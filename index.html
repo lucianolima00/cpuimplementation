@@ -9,73 +9,84 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Trabalho de Implementacao de CPU</h1>
+    <div class="container-fluid">
+        <h1>Trabalho de Implementacao de CPU</h1>
 
-    <div class="cpu-analize">
         <div class="container">
-            <div class="row">
-                <div class="col var">
-                    <p class="name">R0</p>
-                    <p class="value" id="r0">000 000</p>
+            <div class="cpu-analize">
+                <div class="row">
+                    <div class="col var">
+                        <p class="name">R0</p>
+                        <input class="form-control value" id="r0" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="col var">
+                        <p class="name">R1</p>
+                        <input class="form-control value" id="r1" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col var">
+                        <p class="name">R2</p>
+                        <input class="form-control value" id="r2" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="col var">
+                        <p class="name">R3</p>
+                        <input class="form-control value" id="r3" type="text" placeholder="000 000" readonly>
+                    </div>
                 </div>
-                <div class="col var">
-                    <p class="name">R1</p>
-                    <p class="value" id="r1">000 000</p>
+                <div class="row">
+                    <div class="col var">
+                        <p class="name">MBR</p>
+                        <input class="form-control value" id="mbr" type="text" placeholder="000 000" readonly>
+                    </div>
                 </div>
-                <div class="col var">
-                    <p class="name">R2</p>
-                    <p class="value" id="r2">000 000</p>
+                <div class="row">
+                    <div class="col-sm var">
+                        <p class="name">IMM</p>
+                        <input class="form-control value" id="imm" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="col-sm var">
+                        <p class="name">IR</p>
+                        <input class="form-control value" id="ir" type="text" placeholder="000 000" readonly>
+                    </div>
                 </div>
-                <div class="col var">
-                    <p class="name">R3</p>
-                    <p class="value" id="r3">000 000</p>
+                <div class="row">
+                    <div class="col-sm var">
+                        <p class="name">RO0</p>
+                        <input class="form-control value" id="ro0" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="col-sm var">
+                        <p class="name">RO1</p>
+                        <input class="form-control value" id="ro1" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="col-sm var">
+                        <p class="name">RO2</p>
+                        <input class="form-control value" id="ro2" type="text" placeholder="000 000" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm var">
+                        <p class="name">PC</p>
+                        <input class="form-control value" id="pc" type="text" placeholder="000 000" readonly>
+                    </div>
+                    <div class="col-sm var">
+                        <p class="name">MAR</p>
+                        <input class="form-control value" id="mar" type="text" placeholder="000 000" readonly>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col var">
-                    <p class="name">MBR</p>
-                    <p class="value" id="mbr">000 000</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm var">
-                    <p class="name">IMM</p>
-                    <p class="value" id="imm">000 000</p>
-                </div>
-                <div class="col-sm var">
-                    <p class="name">IR</p>
-                    <p class="value" id="ir">000 000</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm var">
-                    <p class="name">RO0</p>
-                    <p class="value" id="ro0">000 000</p>
-                </div>
-                <div class="col-sm var">
-                    <p class="name">RO1</p>
-                    <p class="value" id="ro1">000 000</p>
-                </div>
-                <div class="col-sm var">
-                    <p class="name">RO2</p>
-                    <p class="value" id="ro2">000 000</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm var">
-                    <p class="name">PC</p>
-                    <p class="value" id="pc">000 000</p>
-                </div>
-                <div class="col-sm var">
-                    <p class="name">MAR</p>
-                    <p class="value" id="mar">000 000</p>
+            <div class="form-group" style="height: 100%;">
+                <label for="console">Console</label>
+                <textarea class="form-control" id="console" rows="3"></textarea>
+                <div class="btn-group" role="group" id="btn-runwrite" aria-label="RunWrite">
+                    <button type="button" class="btn btn-secondary" id="btn-run">Run</button>
+                    <button type="button" class="btn btn-secondary" id="btn-write" href="ide.html">Write</button>
                 </div>
             </div>
         </div>
-        
-        <div class="memory"></div>
-
-        <div class="painel"></div>
+        <div id="Mem">
+            <label for="memory">Memory</label>
+            <div id="memory"></div>
+        </div>
     </div>
     <script src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

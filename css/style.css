@@ -1,15 +1,25 @@
-
-.cpu-analize{
-    width: 400px;
+h1{
+    text-align: center;
 }
-
+.container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+.cpu-analize{
+    width: 300px;
+    margin: 0;
+}
+#console{
+    height: auto;
+}
 .var{
     width: auto;
-    height: 30px;
-    background: #a8a8a8;
     border-radius: 2%;
-    margin: 3px;
+    margin: 5px 3px;
     display: inline;
+    padding: 0;
 }
 
 .name{
@@ -18,11 +28,23 @@
     left: 2px;
     bottom: 0;
     margin: 0;
-    font-size: 8pt;
+    font-size: 6pt;
 }
 
 .value{
+    text-align: center;
+    width: 100%;
     float: right;
     padding: 5px 3px 5px 2px;
     margin: 0;
+}
+
+#Mem{
+    margin-top: 20px;
+}
+
+
+#btn-runwrite{
+    display: flex;
+    margin: 30px;
 }
