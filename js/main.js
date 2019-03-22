@@ -156,6 +156,18 @@ var opreg1 = ["ld", "st", "lsh", "rsh", "je", "jne", "jl", "jle", "jg", "jge", "
 var opreg2 = ["cmp", "movrr"];
 var opreg3 = ["add", "sub", "mul", "div"];
 
+function addImm(txt){
+    var num = parseInt(txt, 10);
+    txt = num.toString(2);
+    if(txt.length < 25){
+        var txt2 = "";
+        for(var i = 0; i < 25 - txt.length; i++){
+            txt2 += "0";
+        }
+        txt = txt2 + txt;
+    }
+    return txt;
+}
 
 function compile(){
 	var code = document.getElementById("code");
@@ -185,12 +197,25 @@ function compile(){
                 word += reg2bin.get(wrd[i]);
                 console.log("word = " + word);
             }else{
-                word += wrd[i].toString(2);
+                word += addImm(wrd[i]);
                 console.log("word = " + word);
             }
 
             if(wrd[i+1] == undefined || op2bin.has(wrd[i+1])){
                 if(word != ""){
+                    while(word.length < 32){
+                        word += "0";
+                    }
+                    var word1 = word;
+                    word = ""
+                    for(var k = 1; k <= word1.length; k++){
+                        if(k!= 1 && k % 4 == 0){
+                            word += word1[k-1];
+                            word += " ";
+                        }else{
+                            word += word1[k-1];
+                        }
+                    }
                     for(var j = 0; j < 100; j++){
                         console.log("Salvei " + word + " na " + j + "a posicao");
                         if(mem[j] == "0000 0000 0000 0000 0000 0000 0000 0000"){
