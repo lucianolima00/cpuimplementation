@@ -5,24 +5,24 @@ var E = 0;
 var L = 0;
 var G = 0;
 //R - Registradores, recebem valores antes de inicar o programa
-var r0 = document.getElementById('r0');
-var r1 = document.getElementById('r1');
-var r2 = document.getElementById('r2');
-var r3 = document.getElementById('r3');
+var R0 = document.getElementById('r0');
+var R1 = document.getElementById('r1');
+var R2 = document.getElementById('r2');
+var R3 = document.getElementById('r3');
 //MBR - Recebe a instrucao a ser gravada ou lida
-var mbr = document.getElementById('mbr');
+var MBR = document.getElementById('mbr');
 //IMM - Recebe o valor em binario de um numero
-var imm = document.getElementById('imm');
+var IMM = document.getElementById('imm');
 //IR - Recebe o valor em binario do opcode
-var ir = document.getElementById('ir');
+var IR = document.getElementById('ir');
 //RO - Recebe o registrador a ser usado na instrucao
-var ro0 = document.getElementById('ro0');
-var ro1 = document.getElementById('ro1');
-var ro2 = document.getElementById('ro2');
+var RO0 = document.getElementById('ro0');
+var RO1 = document.getElementById('ro1');
+var RO2 = document.getElementById('ro2');
 //PC - Contador de linhas
-var pc = document.getElementById('pc');
+var PC = document.getElementById('pc');
 //MAR - Recebe o endereço do memoria
-var mar = document.getElementById('mar');
+var MAR = document.getElementById('mar');
 
 
 //Funcao q inicializa a memoria com 0 em todos os enderecos
@@ -136,10 +136,10 @@ var reg2bin = new Map ([
     ["r3", "11"]
 ]);
 
-function load(M, mem){
+function load(M){
     return mem[M];
 }
-function store(regX, M,mem){
+function store(regX, M){
     mem[M] = regX;
 }
 function add(regY, regZ){
@@ -154,16 +154,34 @@ function mul(regY, regZ){
 function div(regY, regZ){
     return regY / regZ;
 }
-/*
 function leftShift(regX, imm){
-
+    var zero = "";
+    for(var i = 0; i< imm; i++){
+        zero += "0";
+    }
+    for(var i =0; i < regX.length; i++){
+        if(i < imm){
+            regX.replace(charAt(i), "");
+        }
+    }
+    regX = regX + zero;
 }
 function rightShift(regX, imm){
+    var zero = "";
+    for(var i = 0; i< imm; i++){
+        zero += "0";
+    }
+    imm = regX.length - imm;
+    for(var i = regX.length; i > 0 ; i--){
+        if(i > imm){
+            regX.replace(charAt(i), "");
+        }
+    }
+
+    regX = zero + regX;
 
 }
- */
-
-function compare(regX, regY, E, L, G){
+function compare(regX, regY){
     if(regX == regY){
         E = 1;
     }else if(regX > regY){
@@ -171,9 +189,69 @@ function compare(regX, regY, E, L, G){
     }else{
         G = 1;
     }
-
 }
-
+function jumpEqual(M){
+    if(E){
+        PC = M;
+    }
+}
+function jumpNotEqual(M){
+    if(!E){
+        PC = M;
+    }
+}
+function jumpLow(M){
+    if(L){
+        PC = M;
+    }
+}
+function jumpLowEqual(M){
+    if(L || E){
+        PC = M;
+    }
+}
+function jumpGreater(M){
+    if(G){
+        PC = M;
+    }
+}
+function jumpGreaterEqual(M){
+    if(G || E){
+        PC = M;
+    }
+}
+function jump(M){
+    PC = M;
+}
+function movImmH(regX, Imm){
+    for(var i = 0; i< Imm.length; i++){
+        if(i > 16){
+            regX.replace(regX.charAt(i),Imm.charAt(i));
+        }
+    }
+}
+function movImmL(regX, Imm){
+    for(var i = 0; i< Imm.length; i++){
+        if(i <= 16){
+            regX.replace(regX.charAt(i),Imm.charAt(i));
+        }
+    }
+}
+function addImm(regX, Imm){
+    regX = regX + Imm;
+}
+function subImm(regX, Imm){
+    regX = regX - Imm;
+}
+function mulImm(regX, Imm){
+    regX = regX * Imm;
+}
+function divImm(regX, Imm){
+    regX = regX / Imm;
+}
+function movRegReg(regX, regY){
+    regX = regY;
+}
 /*
 var desc = [
     'Faz o processador terminar o ciclo de instrucao. Deve-se colocar no fim do programa.',
@@ -213,6 +291,7 @@ function documentation(bin2op){
 */
 
 var opreg1 = ["ld", "st", "lsh", "rsh", "je", "jne", "jl", "jle", "jg", "jge", "jmp", "movih", "movil", "addi", "subi", "muli", "divi"];
+var opregImm = ["movih", "movil", "addi", "subi", "muli", "divi"];
 var opreg2 = ["cmp", "movrr"];
 var opreg3 = ["add", "sub", "mul", "div"];
 
@@ -287,7 +366,115 @@ function compile(){
 compile();
 
 function run(){
-    for(var i = 0; i < mem.length; i++){
+    PC = parseInt(PC,10);
+    if(PC < mem.length){
+        var word = "";
+        MBR = mem[PC];
+        for(var j = 0; j < MBR.length; j++){
+            word += MBR.charAt(i);
+            if(i == 4){
+                IR = word;
+                word = ""
+            }
+            if(i == 6){
+                RO0 = word;
+                word = "";
+            }
+            if(IR in opreg1){
+                if(i == MBR.length - 1){
+                    if(word in opregImm){
+                        IMM = word;
+                        word = "";
+                    }else{
+                        MAR = word;
+                        word = "";
+                    }
+                }
+            }else if(IR in opreg2){
+                if(i == 8){
+                    RO1 = word;
+                    word = "";
+                }
+            }else if(IR in opreg3){
+                if(i == 10){
+                    RO2 = word;
+                    word = "";
+                }
+            }
+        }
+        switch(IR){
+            case "ld":
+                RO0 = load(MAR);
+                break;
+            case "st":
+                store(RO0, MAR);
+                break;
+            case "add":
+                RO0 = add(RO1, RO2);
+                break;
+            case "sub":
+                RO0 = sub(RO1, RO2);
+                break;
+            case "div":
+                RO0 = div(RO1, RO2);
+                break;
+            /*case "lsh":
+                leftShift(RO1, RO2);
+                break;
+            case "rsh":
+                rightShift(RO1, RO2);
+                break;*/
+            case "cmp":
+                compare(RO0, RO1);
+                break;
+            case "je":
+                jumpEqual(MAR);
+                break;
+            case "jne":
+                jumpNotEqual(MAR);
+                break;
+            case "jl":
+                jumpLow(MAR);
+                break;
+            case "jle":
+                jumpLowEqual(MAR);
+                break;
+            case "jg":
+                jumpGreater(MAR);
+                break;
+            case "jge":
+                jumpGreaterEqual(MAR);
+                break;
+            case "jmp":
+                jump(MAR);
+                break;
+            case "movih":
+                movImmH(RO0, IMM);
+                break;
+            case "movil":
+                movImmL(RO0, IMM);
+                break;
+            case "addi":
+                addImm(RO0, IMM);
+                break;
+            case "subi":
+                subImm(RO0, IMM);
+                break;
+            case "muli":
+                mulImm(RO0, IMM);
+                break;
+            case "divi":
+                divImm(RO0, IMM);
+                break;
+            case "movrr":
+                movRegReg(RO0, RO1);
+                break;
+            default:
+                console.log("Opcode nao encontrado");
+                break;
 
+        }
+        PC += 1;
+        PC = PC.toString(2);
     }
 }
