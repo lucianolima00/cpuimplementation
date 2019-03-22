@@ -1,5 +1,9 @@
 //Memoria
 var mem = [];
+//RI - Registradores internos
+var E = 0;
+var L = 0;
+var G = 0;
 //R - Registradores, recebem valores antes de inicar o programa
 var r0 = document.getElementById('r0');
 var r1 = document.getElementById('r1');
@@ -37,15 +41,33 @@ function memory(){
             memInit(mem);
         }
         if(i == 0){
-            el += '<div class="row"><div class="input-group col"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">'+ i.toString(16).toUpperCase() + '</span></div><input class="form-control value" type="text" placeholder="' + mem[i] + '" readonly></div>'
+            el += '<div class="row"><div class="input-group col"><div class="input-group-prepend"><span class="input-group-text">'+ i.toString(16).toUpperCase() + '</span></div><input class="form-control value" type="text" id="'+ i + '" placeholder="' + mem[i] + '" onblur="changeMem()"></div>'
         }
         else if(i % 2 == 0){
-            el += '</div>\n<div class="row"><div class="input-group col"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">'+ i.toString(16).toUpperCase() + '</span></div><input class="form-control value" type="text" placeholder="' + mem[i] + '" readonly></div>'
-        }else{
-            el +='<div class="input-group col"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">'+ i.toString(16).toUpperCase() + '</span></div><input class="form-control value" type="text" placeholder="' + mem[i] + '" readonly></div>';
+            el += '</div>\n<div class="row"><div class="input-group col"><div class="input-group-prepend"><span class="input-group-text">'+ i.toString(16).toUpperCase() + '</span></div><input class="form-control value" type="text" id="'+ i + '" placeholder="' + mem[i] + '" onblur="changeMem()"></div>'
+        }else{ 
+            el +='<div class="input-group col"><div class="input-group-prepend"><span class="input-group-text">'+ i.toString(16).toUpperCase() + '</span></div><input class="form-control value" type="text" id="'+ i + '" placeholder="' + mem[i] + '" onblur="changeMem()"></div>';
         }
         Memory.innerHTML = el;
     }
+}
+
+function changeMem(){
+    var el = event.target;
+    var num = parseInt(el.value, 10); 
+    var txt = "";
+    if (num.toString(2).length < 32){
+        for(var i = 0; i < 32 - num.toString(2).length; i++){
+            txt += "0";
+            if(i % 4 == 0 && i != 0){
+                txt += " ";
+            }
+        }
+        txt += num.toString(2);
+    }
+    mem[el.id] = txt;
+    el.value = "";
+    memory()
 }
 
 var bin2op = new Map([
@@ -114,6 +136,44 @@ var reg2bin = new Map ([
     ["r3", "11"]
 ]);
 
+function load(M, mem){
+    return mem[M];
+}
+function store(regX, M,mem){
+    mem[M] = regX;
+}
+function add(regY, regZ){
+    return regY + regZ;
+}
+function sub(regY, regZ){
+    return regY - regZ;
+}
+function mul(regY, regZ){
+    return regY * regZ;
+}
+function div(regY, regZ){
+    return regY / regZ;
+}
+/*
+function leftShift(regX, imm){
+
+}
+function rightShift(regX, imm){
+
+}
+ */
+
+function compare(regX, regY, E, L, G){
+    if(regX == regY){
+        E = 1;
+    }else if(regX > regY){
+        L = 1;
+    }else{
+        G = 1;
+    }
+
+}
+
 /*
 var desc = [
     'Faz o processador terminar o ciclo de instrucao. Deve-se colocar no fim do programa.',
@@ -172,8 +232,9 @@ function addImm(txt){
 function compile(){
 	var code = document.getElementById("code");
     var btncompile = document.getElementById("btncompile");
+    //Pegar codigo em ASCII e converter em binario e salvar na memoria
     btncompile.onclick = function(){
-        //Pegar codigo em ASCII e converter em binario e salvar na memoria
+        //Cria um array com cada linha do codigo
         var str = code.value.split("\n");
         var wrd = [];
         //Separa espaço e tira as virgulas de cada palavra
@@ -184,21 +245,14 @@ function compile(){
             }
         }
         var word = "";
+        //Verifica se a palavra eh um Opcode, Registrador ou Inteiro
         for(var i = 0; i < wrd.length; i++){
-            console.log("word " + i);
-            console.log(wrd[i]);
-            //console.log(bin2op.has(op2bin.get(wrd[i])));
             if(op2bin.has(wrd[i])){ 
-                console.log("Cheguei no op2bin");
                 word = op2bin.get(wrd[i]);
-                console.log("word = " + word);
             }else if(reg2bin.has(wrd[i])){
-                console.log("Cheguei no reg2bin");
                 word += reg2bin.get(wrd[i]);
-                console.log("word = " + word);
             }else{
                 word += addImm(wrd[i]);
-                console.log("word = " + word);
             }
 
             if(wrd[i+1] == undefined || op2bin.has(wrd[i+1])){
@@ -217,7 +271,6 @@ function compile(){
                         }
                     }
                     for(var j = 0; j < 100; j++){
-                        console.log("Salvei " + word + " na " + j + "a posicao");
                         if(mem[j] == "0000 0000 0000 0000 0000 0000 0000 0000"){
                             mem[j] = word;
                             break;
@@ -232,4 +285,9 @@ function compile(){
     };    
 };
 compile();
-    
+
+function run(){
+    for(var i = 0; i < mem.length; i++){
+
+    }
+}
