@@ -201,22 +201,37 @@ function store(regX, M){
     }
 }
 function add(regX, regY, regZ){
-    regY = parseInt(regReturn(regY), 2);
-    regZ = parseInt(regReturn(regZ), 2);
-    console.log("R0: " + R0);
-    console.log("R1: " + R1);
-    console.log("R2: " + R2);
-    console.log("R3: " + R3);
-    console.log("REGY: " + regReturn(regY));
-    console.log("REGZ: " + regReturn(regZ));
+    if(regY == '00'){
+        regY = R0.split(" ").join("");
+    }else if(regY == '01'){
+        regY = R1.split(" ").join("");
+    }else if(regY == '10'){
+        regY = R2.split(" ").join("");
+    }else if(regY == '11'){
+        regY = R3.split(" ").join("");
+    }
+    if(regZ == '00'){
+        regZ = R0.split(" ").join("");
+    }else if(regZ == '01'){
+        regZ = R1.split(" ").join("");
+    }else if(regZ == '10'){
+        regZ = R2.split(" ").join("");
+    }else if(regZ == '11'){
+        regZ = R3.split(" ").join("");
+    }
+
     if(regX == '00'){
-        R0 = regY + regZ;
+        R0 = parseInt(regY, 2) + parseInt(regZ, 2);
+        R0 = R0.toString(2);
     }else if(regX == '01'){
-        R1 = regY + regZ;
+        R1 = parseInt(regY, 2) + parseInt(regZ, 2);
+        R1 = R1.toString(2);
     }else if(regX == '10'){
-        R2 = regY + regZ;
+        R2 = parseInt(regY, 2) + parseInt(regZ, 2);
+        R2 = R2.toString(2);
     }else if(regX == "11"){
-        R3 = regY + regZ;
+        R3 = parseInt(regY, 2) + parseInt(regZ, 2);
+        R3 = R3.toString(2);
     }else{
         console.log('Registrator not found');
     }
@@ -406,7 +421,6 @@ function movImmH(regX, Imm){
     }
 }
 function movImmL(regX, Imm){
-    regX = regReturn(regX);
     for(var i = 0; i< Imm.length; i++){
         if(i <= 16){
             if(regX == "00"){
@@ -425,58 +439,66 @@ function movImmL(regX, Imm){
 }
 function addImm(regX, Imm){
     if(regX == "00"){
-        R0 = R0 + Imm;
+        R0 = (parseInt(R0.split(" ").join(""), 2) + parseInt(Imm, 2)).toString(2);
     }else if(regX == "01"){
-        R1 = R1 + Imm;
+        R1 = (parseInt(R1.split(" ").join(""), 2) + parseInt(Imm, 2)).toString(2);
     }else if(regX == "10"){
-        R2 = R2 + Imm;
+        R2 = (parseInt(R2.split(" ").join(""), 2) + parseInt(Imm, 2)).toString(2);
     }else if(regX == "11"){
-        R3 = R3 + Imm;
+        R3 = (parseInt(R2.split(" ").join(""), 2) + parseInt(Imm, 2)).toString(2);
     }else{
         console.log("Registrador nao encontrado")
     }
 }
 function subImm(regX, Imm){
     if(regX == "00"){
-        R0 = R0 - Imm;
+        R0 = (parseInt(R0.split(" ").join(""), 2) - parseInt(Imm, 2)).toString(2);
     }else if(regX == "01"){
-        R1 = R1 - Imm;
+        R1 = (parseInt(R1.split(" ").join(""), 2) - ImparseInt(Imm, 2)).toString(2);
     }else if(regX == "10"){
-        R2 = R2 - Imm;
+        R2 = (parseInt(R2.split(" ").join(""), 2) - parseInt(Imm, 2)).toString(2);
     }else if(regX == "11"){
-        R3 = R3 - Imm;
+        R3 = (parseInt(R3.split(" ").join(""), 2) - parseInt(Imm, 2)).toString(2);
     }else{
         console.log("Registrador nao encontrado")
     }
 }
 function mulImm(regX, Imm){
     if(regX == "00"){
-        R0 = R0 * Imm;
+        R0 = (parseInt(R0.split(" ").join(""), 2) * parseInt(Imm, 2)).toString(2);
     }else if(regX == "01"){
-        R1 = R1 * Imm;
+        R1 = (parseInt(R1.split(" ").join(""), 2) * ImparseInt(Imm, 2)).toString(2);
     }else if(regX == "10"){
-        R2 = R2 * Imm;
+        R2 = (parseInt(R2.split(" ").join(""), 2) * parseInt(Imm, 2)).toString(2);
     }else if(regX == "11"){
-        R3 = R3 * Imm;
+        R3 = (parseInt(R3.split(" ").join(""), 2) * parseInt(Imm, 2)).toString(2);
     }else{
         console.log("Registrador nao encontrado")
     }
 }
 function divImm(regX, Imm){
     if(regX == "00"){
-        R0 = R0 / Imm;
+        R0 = (parseInt(R0.split(" ").join(""), 2) / parseInt(Imm, 2)).toString(2);
     }else if(regX == "01"){
-        R1 = R1 / Imm;
+        R1 = (parseInt(R1.split(" ").join(""), 2) / parseInt(Imm, 2)).toString(2);
     }else if(regX == "10"){
-        R2 = R2 / Imm;
+        R2 = (parseInt(R2.split(" ").join(""), 2) / parseInt(Imm, 2)).toString(2);
     }else if(regX == "11"){
-        R3 = R3 / Imm;
+        R3 = (parseInt(R3.split(" ").join(""), 2) / parseInt(Imm, 2)).toString(2);
     }else{
         console.log("Registrador nao encontrado")
     }
 }
 function movRegReg(regX, regY){
-    regY = parseInt(regReturn(regY), 2);
+    if(regY == "00"){
+        regY = R0;
+    }else if (regY == "01"){
+        regY = R1;
+    }else if (regY == "10"){
+        regY = R2;
+    }else if (regY == "11"){
+        regY = R3;
+    }
     if(regX == "00"){
         R0 = regY;
     }else if(regX == "01"){
@@ -546,6 +568,7 @@ function addImm(txt){
 }
 
 function compile(){
+    PC = "00";
 	var code = document.getElementById("code");
     var btncompile = document.getElementById("btncompile");
     //Pegar codigo em ASCII e converter em binario e salvar na memoria
@@ -600,20 +623,24 @@ function compile(){
 };
 compile();
 function run(){
+
     var word = "";
-    PC = parseInt(PC,2);
+    var p = parseInt(PC,2);
     if(srch == false){
-        if(PC < mem.length){
-            MBR = mem[PC];
+        MAR = "0000 0000 0000 0000 0000 0000 0000 0000";
+        IMM = "0000 0000 0000 0000 0000 0000 0000 0000";
+        IR = "00000";
+        RO0 = "00";
+        RO1 = "00";
+        RO2 = "00";
+        if(p < mem.length){
+            MBR = mem[p];
             srch = true;
-            PC = PC.toString(2);
-            registrator();
         }
     }else if(deco == false){
         var mb = MBR.split(" ").join("")
         for(var j = 0; j < MBR.length; j++){
             word += mb.charAt(j);
-            console.log(mb);
             if(j == 4){
                 IR = ""
                 IR = word.split(" ").join("")
@@ -628,8 +655,9 @@ function run(){
             for (var i = 0; i < opreg1.length && found == "0"; i++) {
                 if (opreg1[i] == l) {
                     found = "1";
-                    for (var k = 0; k < opregImm.length && !found; k++) {
+                    for (var k = 0; k < opregImm.length && found == "1"; k++) {
                         if (opregImm[k] == l) {
+                            found = "IMM";
                             break;
                         }
                     }
@@ -649,31 +677,35 @@ function run(){
                     if(found == "IMM"){
                         IMM = word;
                         word = "";
+                        MAR = "0000 0000 0000 0000 0000 0000 0000 0000";
                     }else{
                         MAR = word;
                         word = "";
+                        IMM = "0000 0000 0000 0000 0000 0000 0000 0000";
                     }
                 }
             }else if(found == "2"){
                 if(j == 8){
                     RO1 = word;
                     word = "";
+                    MAR = "0000 0000 0000 0000 0000 0000 0000 0000";
+                    IMM = "0000 0000 0000 0000 0000 0000 0000 0000";
                 }
             }else if(found == "3"){
                 if(j == 8){
                     RO1 = word;
-                    console.log(RO1);
                     word = "";
+                    MAR = "0000 0000 0000 0000 0000 0000 0000 0000";
+                    IMM = "0000 0000 0000 0000 0000 0000 0000 0000";
                 }
                 if(j == 10){
                     RO2 = word;
-                    console.log(RO2);
                     word = "";
+                    MAR = "0000 0000 0000 0000 0000 0000 0000 0000";
+                    IMM = "0000 0000 0000 0000 0000 0000 0000 0000";
                 }
             }
             deco = true;
-            PC = PC.toString(2);
-            registrator();
         }
     }else{
         switch(bin2op.get(IR)){
@@ -747,13 +779,13 @@ function run(){
                 console.log("Opcode nao encontrado");
                 break;
         }
-        PC = parseInt(PC, 2);
-        PC += 1;
-        PC = PC.toString(2);
-        registrator();
         srch = false;
         deco = false;
+        p += 1;
+        PC = p.toString(2);
+
     }
+    registrator();
     btnrun = document.getElementById("run");
     if(srch == false){
         btnrun.textContent = "Search";
