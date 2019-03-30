@@ -21,18 +21,9 @@ h1{
     float: left;
     padding: 10px;
     left: 0px;
-    bottom: 10px;
     margin: 0;
     font-size: 8pt;
     background: #ccc;
-}
-
-.value{
-    text-align: center;
-    width: 100%;
-    float: right;
-    padding: 5px 3px 5px 2px;
-    margin: 0;
 }
 
 #btncompile, #run, #clear{
@@ -40,14 +31,45 @@ h1{
 }
 
 #code {
-    width: 100%;
-    min-height: 250px;
+    height: 280px;
     overflow: scroll;
     margin: auto;
     background: #F4F4F9;
     outline: none;
     font-family: Courier, sans-serif;
     font-size: 14px;
+}
+#cpuanalize, #ide{
+    height: 350px;
+}
+#cpuanalize{
+    width: 55%;
+    right: 0;
+}
+#cpuanalize input{
+    font-size: 10pt;
+    margin: 0;
+    height: 35px;
+    text-align: center;
+}
+#cpuanalize .row{
+    margin: 0 5px 5px 5px;
+}
+#cpuanalize .var{
+    margin: 0;
+}
+#cpuanalize .input-group-prepend{
+    width: 100%;
+    height: 45px;
+}
+
+#memory .input-group-prepend{
+    width:390px;
+    height: 45px;
+}
+
+#memory .value{
+    text-align: center;
 }
 
 body{
@@ -69,7 +91,7 @@ body {
     margin: 0;
 }
 
-#cpuanalize, #memory{
+ #memory{
     margin-top: 10px;
 }
 
@@ -113,7 +135,7 @@ body .row-footer{
 .container{
 	width: 100%;
 	margin: 5px 5px 0 0;
-	padding: 64px 0 0  60px;
+	padding: 64px 0 0  0;
 	transition: padding-left 0.5s, padding-right 0.5s;
 	/* Safari and Chrome*/
 	-webkit-transition: padding-left 0.5s, padding-right 0.5s;

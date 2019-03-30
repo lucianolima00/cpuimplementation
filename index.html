@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Raleway|Staatliches" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
-	<title>Dashboard</title>
+	<title>Trabalho de Implementacao</title>
 </head>
 <body id="body" onload="memory()">
 	<!-- NavBar -->
@@ -35,8 +35,98 @@
 		<div class="content">
             <div class="card" style="margin-bottom: 30px; width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">IDE</h5>
-                    <textarea id="code" placeholder="Write your code"></textarea>
+                    <div class="row">
+                        <div id="ide" style="width: 45%;">
+                            <h5 class="card-title">IDE</h5>
+                            <textarea id="code" placeholder="Write your code"></textarea>
+                        </div>
+                        <div id="cpuanalize">
+                            <h5 class="card-title">CPU</h5>
+                            <div class="row">
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">R0</span>
+                                        <input class="form-control value" id="r0" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">R1</span>
+                                        <input class="form-control value" id="r1" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">R2</span>
+                                        <input class="form-control value" id="r2" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">R3</span>
+                                        <input class="form-control value" id="r3" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">MBR</span>
+                                        <input class="form-control value" id="mbr" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">IMM</span>
+                                        <input class="form-control value" id="imm" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">IR</span>
+                                        <input class="form-control value" id="ir" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">RO0</span>
+                                        <input class="form-control value" id="ro0" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">RO1</span>
+                                        <input class="form-control value" id="ro1" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">RO2</span>
+                                        <input class="form-control value" id="ro2" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">PC</span>
+                                        <input class="form-control value" id="pc" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <div class="input-group col">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text name">MAR</span>
+                                        <input class="form-control value" id="mar" type="text" placeholder="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -48,99 +138,34 @@
                 <div class="card-body">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background: #bbb; height: 64px;">
-                            <a class="nav-item nav-link active" data-toggle="tab" id="cpuanalize-tab" href="#cpuanalize" role="tab" aria-controls="cpuanalize" aria-selected="true" style="height:64px; padding-top: 0px; padding-bottom: 0px;">CPU</a>
-                            <a class="nav-item nav-link" data-toggle="tab" id="memory-tab" href="#memory" role="tab" aria-controls="memory" aria-selected="false" style="height:64px; padding-top: 0px; padding-bottom: 0px;">Memory</a>
+                            <a class="nav-item nav-link active" data-toggle="tab" id="memory-tab" href="#memory" role="tab" aria-controls="memory" aria-selected="true" style="height:64px; padding-top: 0px; padding-bottom: 0px;">Memory</a>
                         </div>
                     </nav>
-                    <div class="tab-pane fade show active" id="cpuanalize" role="tabpanel" aria-labelledby="cpuanalize-tab">
-                        <div class="row">
-                            <div class="col var">
-                                <p class="name">R0</p>
-                                <input class="form-control value" id="r0" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="col var">
-                                <p class="name">R1</p>
-                                <input class="form-control value" id="r1" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="w-100"></div>
-                            <div class="col var">
-                                <p class="name">R2</p>
-                                <input class="form-control value" id="r2" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="col var">
-                                <p class="name">R3</p>
-                                <input class="form-control value" id="r3" type="text" placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col var">
-                                <p class="name">MBR</p>
-                                <input class="form-control value" id="mbr" type="text" placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm var">
-                                <p class="name">IMM</p>
-                                <input class="form-control value" id="imm" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="col-sm var">
-                                <p class="name">IR</p>
-                                <input class="form-control value" id="ir" type="text" placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm var">
-                                <p class="name">RO0</p>
-                                <input class="form-control value" id="ro0" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="col-sm var">
-                                <p class="name">RO1</p>
-                                <input class="form-control value" id="ro1" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="col-sm var">
-                                <p class="name">RO2</p>
-                                <input class="form-control value" id="ro2" type="text" placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm var">
-                                <p class="name">PC</p>
-                                <input class="form-control value" id="pc" type="text" placeholder="" readonly>
-                            </div>
-                            <div class="col-sm var">
-                                <p class="name">MAR</p>
-                                <input class="form-control value" id="mar" type="text" placeholder="" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade active" id="memory" role="tabpanel" aria-labelledby="memory-tab">
+                    <div class="tab-pane fade active show" id="memory" role="tabpanel" aria-labelledby="memory-tab">
                         <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">0</span>
+                                    <input class="form-control value" type="text" id="0" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="0" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">1</span>
+                                    <input class="form-control value" type="text" id="1" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="1" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2</span>
+                                    <input class="form-control value" type="text" id="2" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="2" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3</span>
+                                    <input class="form-control value" type="text" id="3" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="3" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -148,29 +173,26 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4</span>
+                                    <input class="form-control value" type="text" id="4" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="4" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5</span>
+                                    <input class="form-control value" type="text" id="5" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="5" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">6</span>
+                                    <input class="form-control value" type="text" id="6" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="6" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">7</span>
+                                    <input class="form-control value" type="text" id="7" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="7" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -178,29 +200,26 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">8</span>
+                                    <input class="form-control value" type="text" id="8" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="8" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">9</span>
+                                    <input class="form-control value" type="text" id="9" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="9" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">A</span>
+                                    <input class="form-control value" type="text" id="10" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="10" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">B</span>
+                                    <input class="form-control value" type="text" id="11" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="11" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -208,29 +227,26 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">C</span>
+                                    <input class="form-control value" type="text" id="12" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="12" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">D</span>
+                                    <input class="form-control value" type="text" id="13" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="13" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">E</span>
+                                    <input class="form-control value" type="text" id="14" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="14" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">F</span>
+                                    <input class="form-control value" type="text" id="15" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="15" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -238,29 +254,28 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">10</span>
+                                    <input class="form-control value" type="text" id="16" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="16" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">11</span>
+                                    <input class="form-control value" type="text" id="17" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="17" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">12</span>
+                                    <input class="form-control value" type="text" id="18" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="18" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">13</span>
+                                    <input class="form-control value" type="text" id="19" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="19" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -268,29 +283,26 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">14</span>
+                                    <input class="form-control value" type="text" id="20" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="20" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">15</span>
+                                    <input class="form-control value" type="text" id="21" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="21" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">16</span>
+                                    <input class="form-control value" type="text" id="22" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="22" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">17</span>
+                                    <input class="form-control value" type="text" id="23" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="23" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -298,29 +310,26 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">18</span>
+                                    <input class="form-control value" type="text" id="24" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="24" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">19</span>
+                                    <input class="form-control value" type="text" id="25" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="25" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">1A</span>
+                                    <input class="form-control value" type="text" id="26" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="26" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">1B</span>
+                                    <input class="form-control value" type="text" id="27" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="27" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -328,59 +337,55 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">1C</span>
+                                    <input class="form-control value" type="text" id="28" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="28" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">1D</span>
+                                    <input class="form-control value" type="text" id="29" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="29" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="input-group col">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">1E</span>
-                                </div>
-                                <input class="form-control value" type="text" id="30" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
-                            </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">1F</span>
-                                </div>      
-                                <input class="form-control value" type="text" id="31" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                    <input class="form-control value" type="text" id="30" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">20</span>
+                                    <input class="form-control value" type="text" id="31" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="32" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
-                            </div>
-                            <div class="input-group col">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">21</span>
-                                </div>
-                                <input class="form-control value" type="text" id="33" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">22</span>
+                                    <span class="input-group-text">21</span>
+                                    <input class="form-control value" type="text" id="32" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="34" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">23</span>
+                                    <span class="input-group-text">22</span>
+                                    <input class="form-control value" type="text" id="33" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="35" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                            </div>
+                        </div>
+                            <div class="input-group col">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">23</span>
+                                    <input class="form-control value" type="text" id="34" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                </div>
+                            </div>
+                            <div class="input-group col">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">24</span>
+                                    <input class="form-control value" type="text" id="35" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                </div>
                             </div>
                         </div>
 
@@ -388,14 +393,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">24</span>
+                                    <input class="form-control value" type="text" id="36" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="36" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">25</span>
+                                    <input class="form-control value" type="text" id="37" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="37" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -403,14 +408,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">26</span>
+                                    <input class="form-control value" type="text" id="38" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="38" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">27</span>
+                                    <input class="form-control value" type="text" id="39" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="39" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -418,14 +423,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">28</span>
+                                    <input class="form-control value" type="text" id="40" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="40" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">29</span>
+                                    <input class="form-control value" type="text" id="41" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="41" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -433,14 +438,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2A</span>
+                                    <input class="form-control value" type="text" id="42" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="42" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2B</span>
+                                    <input class="form-control value" type="text" id="43" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="43" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -448,14 +453,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2C</span>
+                                    <input class="form-control value" type="text" id="44" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="44" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2D</span>
+                                    <input class="form-control value" type="text" id="45" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="45" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -463,14 +468,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2E</span>
+                                    <input class="form-control value" type="text" id="46" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="46" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">2F</span>
+                                    <input class="form-control value" type="text" id="47" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="47" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -478,14 +483,14 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">30</span>
+                                    <input class="form-control value" type="text" id="48" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="48" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">31</span>
+                                    <input class="form-control value" type="text" id="49" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="49" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
@@ -493,374 +498,372 @@
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">32</span>
+                                    <input class="form-control value" type="text" id="50" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="50" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">33</span>
+                                    <input class="form-control value" type="text" id="51" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="51" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">34</span>
+                                    <input class="form-control value" type="text" id="52" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="52" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">35</span>
+                                    <input class="form-control value" type="text" id="53" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="53" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="input-group col">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">36</span>
-                                </div>
-                                <input class="form-control value" type="text" id="54" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
-                            </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">37</span>
+                                    <input class="form-control value" type="text" id="54" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="55" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">38</span>
+                                    <input class="form-control value" type="text" id="55" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="56" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">39</span>
+                                    <input class="form-control value" type="text" id="56" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="57" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3A</span>
+                                    <input class="form-control value" type="text" id="57" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="58" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3B</span>
+                                    <input class="form-control value" type="text" id="58" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="59" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3C</span>
+                                    <input class="form-control value" type="text" id="59" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="60" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3D</span>
+                                    <input class="form-control value" type="text" id="60" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="61" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3E</span>
+                                    <input class="form-control value" type="text" id="61" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="62" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">3F</span>
+                                    <input class="form-control value" type="text" id="62" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="63" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">40</span>
+                                    <input class="form-control value" type="text" id="63" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="64" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">41</span>
+                                    <input class="form-control value" type="text" id="64" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="65" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">42</span>
+                                    <input class="form-control value" type="text" id="65" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="66" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">43</span>
+                                    <input class="form-control value" type="text" id="66" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="67" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">44</span>
+                                    <input class="form-control value" type="text" id="67" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="68" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">45</span>
+                                    <input class="form-control value" type="text" id="68" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="69" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">46</span>
+                                    <input class="form-control value" type="text" id="69" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="70" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">47</span>
+                                    <input class="form-control value" type="text" id="70" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="71" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">48</span>
+                                    <input class="form-control value" type="text" id="71" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="72" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">49</span>
+                                    <input class="form-control value" type="text" id="72" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="73" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4A</span>
+                                    <input class="form-control value" type="text" id="73" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="74" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4B</span>
+                                    <input class="form-control value" type="text" id="74" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="75" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4C</span>
+                                    <input class="form-control value" type="text" id="75" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="76" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4D</span>
+                                    <input class="form-control value" type="text" id="76" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="77" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4E</span>
+                                    <input class="form-control value" type="text" id="77" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="78" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">4F</span>
+                                    <input class="form-control value" type="text" id="78" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="79" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">50</span>
+                                    <input class="form-control value" type="text" id="79" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="80" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">51</span>
-                                </div>      
-                                <input class="form-control value" type="text" id="81" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                    <input class="form-control value" type="text" id="80" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">52</span>
+                                    <input class="form-control value" type="text" id="81" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="82" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">53</span>
+                                    <input class="form-control value" type="text" id="82" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="83" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">54</span>
+                                    <input class="form-control value" type="text" id="83" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="84" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">55</span>
+                                    <input class="form-control value" type="text" id="84" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="85" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">56</span>
+                                    <input class="form-control value" type="text" id="85" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="86" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">57</span>
+                                    <input class="form-control value" type="text" id="86" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="87" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">58</span>
+                                    <input class="form-control value" type="text" id="87" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="88" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">59</span>
+                                    <input class="form-control value" type="text" id="88" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="89" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5A</span>
+                                    <input class="form-control value" type="text" id="89" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="90" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5B</span>
+                                    <input class="form-control value" type="text" id="90" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="91" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5C</span>
+                                    <input class="form-control value" type="text" id="91" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="92" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5D</span>
+                                    <input class="form-control value" type="text" id="92" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="93" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5E</span>
+                                    <input class="form-control value" type="text" id="93" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="94" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">5F</span>
+                                    <input class="form-control value" type="text" id="94" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="95" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">60</span>
+                                    <input class="form-control value" type="text" id="95" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="96" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
-                            </div>
-                            <div class="input-group col">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">61</span>
-                                </div>
-                                <input class="form-control value" type="text" id="97" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-group col">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">62</span>
+                                    <span class="input-group-text">61</span>
+                                    <input class="form-control value" type="text" id="96" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="98" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                             </div>
                             <div class="input-group col">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">63</span>
+                                    <span class="input-group-text">62</span>
+                                    <input class="form-control value" type="text" id="97" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
                                 </div>
-                                <input class="form-control value" type="text" id="99" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-group col">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">63</span>
+                                    <input class="form-control value" type="text" id="98" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                </div>
+                            </div>
+                            <div class="input-group col">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">64</span>
+                                    <input class="form-control value" type="text" id="99" placeholder="0000 0000 0000 0000 0000 0000 0000 0000" onblur="changeMem()">
+                                </div>
                             </div>
                         </div>
                     </div>
