@@ -47,7 +47,7 @@ h1{
     right: 0;
 }
 #cpuanalize input{
-    font-size: 10pt;
+    font-size: 12pt;
     margin: 0;
     height: 35px;
     text-align: center;
@@ -64,7 +64,6 @@ h1{
 }
 
 #memory .input-group-prepend{
-    width:390px;
     height: 45px;
 }
 
