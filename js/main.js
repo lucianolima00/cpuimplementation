@@ -22,7 +22,7 @@ var RO0;
 var RO1;
 var RO2;
 //PC - A ponta a posicao da memoria a ser lida
-var PC;
+var PC = 0;
 //MAR - Recebe o endereço do memoria
 var MAR;
 
@@ -35,18 +35,18 @@ function regInit(){
     E = 0;
     L = 0;
     G = 0;
-    R0 = "0";
-    R1 = "0";
-    R2 = "0";
-    R3 = "0";
-    MBR = "0";
-    IMM = "0";
-    IR = "0";
-    RO0 = "0";
-    RO1 = "0";
-    RO2 = "0";
-    PC = "0";
-    MAR = "0";
+    R0 = "";
+    R1 = "";
+    R2 = "";
+    R3 = "";
+    MBR = "";
+    IMM = "";
+    IR = "";
+    RO0 = "";
+    RO1 = "";
+    RO2 = "";
+    PC = 0;
+    MAR = "";
     registrator();
 }
 //Funcao q mostra (atualiza) os registradores na pag
@@ -69,7 +69,7 @@ function registrator(){
 //Funcao q inicializa a memoria com 0 em todos os enderecos
 function memInit(){
     for(var i = 0; i < 100; i++){
-        mem[i] = "0";
+        mem[i] = "";
     }
     regInit();
     memory();
@@ -80,13 +80,14 @@ function memory(){
     var m;
     var memory;
     for(var i = 0; i < 100; i++){
-        if(mem[i] == undefined){
-            memInit();
-            regInit();
-        }
         m = document.getElementById(i);
-        memory = parseInt(mem[i], 2);
-        m.placeholder = addZeroHex(memory.toString(16));
+        if(mem[i] == "" || mem[i] == undefined){
+            m.placeholder = "-";
+        }
+        else{
+            memory = parseInt(mem[i], 2);
+            m.placeholder = addZeroHex(memory.toString(16));
+        }
     }
     registrator();
 }
@@ -214,23 +215,28 @@ function addZeroBin(txt){
 
 //Adiciona 0s a esquerda ate palavra ter 6 bits
 function addZeroHex(txt){
-    if(txt.length < 6){
-        var txt2 = "";
-        for(var i = 0; i < 6 - txt.length; i++){
-            txt2 += "0";
+    if(txt == undefined || txt == "-"){
+        return "-";
+    }else{
+        if(txt.length < 6){
+            var txt2 = "";
+            for(var i = 0; i < 6 - txt.length; i++){
+                txt2 += "0";
+            }
+            txt = txt2 + txt;
         }
-        txt = txt2 + txt;
+        return "0x" + txt.toUpperCase();
     }
-    return "0x" + txt.toUpperCase();
 }
 
 //Converte IMM para binario e adiciona 0 a esquerda caso seja menor q 32bits
-function addZeroImm(txt){
+function addZeroImm(wrd, txt){
     var num = parseInt(txt, 10);
     txt = num.toString(2);
-    if(txt.length < 25){
+    wrd += txt;
+    if(wrd.length < 32){
         var txt2 = "";
-        for(var i = 0; i < 25 - txt.length; i++){
+        for(var i = 0; i < 32 - wrd.length; i++){
             txt2 += "0";
         }
         txt = txt2 + txt;
@@ -242,11 +248,11 @@ function addZeroImm(txt){
 function returnReg(regX){
     if(regX == '0'){
         return R0;
-    }else if(regZ == '1'){
+    }else if(regX == '1'){
         return R1;
-    }else if(regZ == '10'){
+    }else if(regX == '10'){
         return R2;
-    }else if(regZ == '11'){
+    }else if(regX == '11'){
         return R3;
     }else{
         console.log('Registrator not found');
@@ -256,7 +262,6 @@ function returnReg(regX){
 //Funcao que finaliza o programa
 function halt(){
     btncompile = document.getElementById("run");
-    btncompile.value = "Disabled";
     btncompile.disabled = true;
 }
 
@@ -365,43 +370,36 @@ function div(regX, regY, regZ){
 
 //Funcao que deleta uma quantidade de casas a esquerda e adiciona 0s a direita
 function leftShift(regX, imm){
+    imm = parseInt(imm, 2);
     var zero = "";
-    for(var i = 0; i< imm; i++){
+    for(var i = 0; i < imm; i++){
         zero += "0";
     }
     if(regX == '0'){
         var r = addZeroBin(parseInt(R0, 16).toString(2));
-        for(var i = 0; i < r.length; i++){
-            if(i < imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            r.replace(r.charAt(i), "");
         }
         r = r + zero;
         R0 = parseInt(r, 2).toString(16);
     }else if(regX == '1'){
         var r = addZeroBin(parseInt(R1, 16).toString(2));
-        for(var i = 0; i < r.length; i++){
-            if(i < imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            r.replace(r.charAt(i), "");
         }
         r = r + zero;
         R1 = parseInt(r, 2).toString(16);
     }else if(regX == '10'){
         var r = addZeroBin(parseInt(R2, 16).toString(2));
-        for(var i = 0; i < r.length; i++){
-            if(i < imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            r.replace(r.charAt(i), "");
         }
         r = r + zero;
         R2 = parseInt(r, 2).toString(16);
     }else if(regX == "11"){
         var r = addZeroBin(parseInt(R3, 16).toString(2));
-        for(var i = 0; i < r.length; i++){
-            if(i < imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            r.replace(r.charAt(i), "");
         }
         r = r + zero;
         R3 = parseInt(r, 2).toString(16);
@@ -412,46 +410,40 @@ function leftShift(regX, imm){
 
 //Funcao que deleta uma quantidade de casas a direita e adiciona 0s a esquerda
 function rightShift(regX, imm){
+    imm = parseInt(imm, 2);
     var zero = "";
-    for(var i = 0; i< imm; i++){
+    for(var i = 0; i < imm; i++){
         zero += "0";
     }
     imm = 32 - imm;
+    var ro = [];
     if(regX == '0'){
         var r = addZeroBin(parseInt(R0, 16).toString(2));
-        for(var i = r.length; i > imm; i--){
-            if(i > imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            ro.push(r[i]);
         }
-        r = zero + r;
+        r = zero + ro.join("");
         R0 = parseInt(r, 2).toString(16);
     }else if(regX == '1'){
         var r = addZeroBin(parseInt(R1, 16).toString(2));
-        for(var i = r.length; i > imm; i--){
-            if(i > imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            ro.push(r[i]);
         }
-        r = zero + r;
+        r = zero + ro.join("");
         R1 = parseInt(r, 2).toString(16);
     }else if(regX == '10'){
         var r = addZeroBin(parseInt(R2, 16).toString(2));
-        for(var i = r.length; i > imm; i--){
-            if(i > imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            ro.push(r[i]);
         }
-        r = zero + r;
+        r = zero + ro.join("");
         R2 = parseInt(r, 2).toString(16);
     }else if(regX == "11"){
         var r = addZeroBin(parseInt(R3, 16).toString(2));
-        for(var i = r.length; i > imm; i--){
-            if(i > imm){
-                r.replace(charAt(i), "");
-            }
+        for(var i = 0; i < imm; i++){
+            ro.push(r[i]);
         }
-        r = zero + r;
+        r = zero + ro.join("");
         R3 = parseInt(r, 2).toString(16);
     }else{
         console.log('Registrator not found');
@@ -468,7 +460,7 @@ function compare(regX, regY){
         E = 1;
         L = 0;
         G = 0;
-    }else if(parseInt(regX, 16) > parseInt(regY, 16)){
+    }else if(parseInt(regX, 16) < parseInt(regY, 16)){
         L = 1;
         E = 0;
         G = 0;
@@ -481,74 +473,124 @@ function compare(regX, regY){
 
 //Funcao que move a execucao para uma posicao na memoria dependendo do resultado do compare
 function jumpEqual(M){
-    if(E){
-        PC = M;
+    if(E == 1){
+        PC = M - 1;
     }
 }
 
 //Funcao que move a execucao para uma posicao na memoria dependendo do resultado do compare
 function jumpNotEqual(M){
-    if(!E){
-        PC = M;
+    if(E == 0){
+        PC = M - 1;
     }
 }
 
 //Funcao que move a execucao para uma posicao na memoria dependendo do resultado do compare
 function jumpLow(M){
-    if(L){
-        PC = M;
+    if(L == 1){
+        PC = M - 1;
     }
 }
 
 //Funcao que move a execucao para uma posicao na memoria dependendo do resultado do compare
 function jumpLowEqual(M){
-    if(L || E){
-        PC = M;
+    if(L == 1 || E == 1){
+        PC = M - 1;
     }
 }
 
 //Funcao que move a execucao para uma posicao na memoria dependendo do resultado do compare
 function jumpGreater(M){
-    if(G){
-        PC = M;
+    if(G == 1){
+        PC = M - 1;
     }
 }
 
 //Funcao que move a execucao para uma posicao na memoria dependendo do resultado do compare
 function jumpGreaterEqual(M){
-    if(G || E){
-        PC = M;
+    if(G == 1 || E == 1){
+        PC = M - 1;
     }
 }
 
 //Funcao que move a execucao para uma posicao na memoria
 function jump(M){
-    PC = M;
+    PC = M - 1;
 }
 
 //Funcao que adiciona a um registrador, pedaco de um numero
 function movImmH(regX, Imm){
-    for(var i = 0; i < Imm.length; i++){
-        if(i > 16){
-            var r;
-            if(regX == "0"){
-                r = addZeroBin(parseInt(R0, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R0 = parseInt(r, 2).toString(16);
-            }else if(regX == "1"){
-                r = addZeroBin(parseInt(R1, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R1 = parseInt(r, 2).toString(16);  
-            }else if(regX == "10"){
-                r = addZeroBin(parseInt(R2, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R2 = parseInt(r, 2).toString(16);
-            }else if(regX == "11"){
-                r = addZeroBin(parseInt(R3, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R3 = parseInt(r, 2).toString(16);
+    var r =[];
+    Imm = addZeroBin(Imm);
+    if(regX == "0"){
+        if(R0 == undefined || R0 == "-" || R0 == "0"){
+            R0 = addZeroBin(R0);
+        }else{
+            R0 = parseInt(R0, 16).toString(2);
+        }
+        for(var i = 0; i < Imm.length; i++){
+            if(i > 15){
+                r.push(Imm.charAt(i));
             }else{
-                console.log("Registrador nao encontrado")
+                r.push(R0.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R0 = r.join("");
+                R0 = parseInt(R0, 2).toString(16);
+            }
+        }
+    }
+    if(regX == "1"){
+        if(R1 == undefined || R1 == "-" || R1 == "0"){
+            R1 = addZeroBin(R1);
+        }else{
+            R1 = parseInt(R1, 16).toString(2);
+        }
+        for(var i = 0; i < Imm.length; i++){
+            if(i > 15){
+                r.push(Imm.charAt(i));
+            }else{
+                r.push(R1.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R1 = r.join("");
+                R1 = parseInt(R1, 2).toString(16);
+            }
+        }
+    }
+    if(regX == "10"){
+        if(R2 == undefined || R2 == "-" || R2 == "0"){
+            R2 = addZeroBin(R2);
+        }else{
+            R2 = parseInt(R2, 16).toString(2);
+        }
+        for(var i = 0; i < Imm.length; i++){
+            if(i > 15){
+                r.push(Imm.charAt(i));
+            }else{
+                r.push(R2.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R2 = r.join("");
+                R2 = parseInt(R2, 2).toString(16);
+            }
+        }
+    }
+    if(regX == "11"){
+        if(R3 == undefined || R3 == "-" || R3 == "0"){
+            R3 = addZeroBin(R3);
+        }else{
+            R3 = parseInt(R3, 16).toString(2);
+        }
+        for(var i = 0; i < Imm.length; i++){
+            if(i > 15){
+                r.push(Imm.charAt(i));
+            }else{
+                r.push(R3.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R3 = r.join("");
+                R3 = parseInt(R3, 2).toString(16);
             }
         }
     }
@@ -556,27 +598,61 @@ function movImmH(regX, Imm){
 
 //Funcao que adiciona a um registrador, pedaco de um numero
 function movImmL(regX, Imm){
-    for(var i = 0; i< Imm.length; i++){
-        if(i <= 16){
-            var r;
-            if(regX == "0"){
-                r = addZeroBin(parseInt(R0, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R0 = parseInt(r, 2).toString(16);
-            }else if(regX == "1"){
-                r = addZeroBin(parseInt(R1, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R1 = parseInt(r, 2).toString(16);  
-            }else if(regX == "10"){
-                r = addZeroBin(parseInt(R2, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R2 = parseInt(r, 2).toString(16);
-            }else if(regX == "11"){
-                r = addZeroBin(parseInt(R3, 16).toString(2));
-                r.replace(r.charAt(i),Imm.charAt(i));
-                R3 = parseInt(r, 2).toString(16);
+    var r =[];
+    Imm = addZeroBin(Imm);
+    if(regX == "0"){
+        R0 = addZeroBin("0");
+        for(var i = 0; i < Imm.length; i++){
+            if(i <= 15){
+                r.push(Imm.charAt(i));
             }else{
-                console.log("Registrador nao encontrado")
+                r.push(R0.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R0 = r.join("");
+                R0 = parseInt(R0, 2).toString(16);
+            }
+        }
+    }
+    if(regX == "1"){
+        R1 = addZeroBin("0");
+        for(var i = 0; i < Imm.length; i++){
+            if(i <= 15){
+                r.push(Imm.charAt(i));
+            }else{
+                r.push(R1.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R1 = r.join("");
+                R1 = parseInt(R1, 2).toString(16);
+            }
+        }
+    }
+    if(regX == "10"){
+        R2 = addZeroBin("0");
+        for(var i = 0; i < Imm.length; i++){
+            if(i <= 15){
+                r.push(Imm.charAt(i));
+            }else{
+                r.push(R2.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R2 = r.join("");
+                R2 = parseInt(R2, 2).toString(16);
+            }
+        }
+    }
+    if(regX == "11"){
+        R3 = addZeroBin("0");
+        for(var i = 0; i < Imm.length; i++){
+            if(i <= 15){
+                r.push(Imm.charAt(i));
+            }else{
+                r.push(R3.charAt(i));
+            }
+            if(i == Imm.length - 1){
+                R3 = r.join("");
+                R3 = parseInt(R3, 2).toString(16);
             }
         }
     }
@@ -585,13 +661,25 @@ function movImmL(regX, Imm){
 //Funcao que adiciona a um registrador um valor inteiro
 function addImm(regX, Imm){
     if(regX == "0"){
-        R0 = (parseInt(R0, 2) + parseInt(Imm, 2)).toString(16);
+        if(R0 == undefined || R0 == "-" || R0 == ""){
+            R0 = "0";
+        }
+        R0 = (parseInt(R0, 16) + parseInt(Imm, 2)).toString(16);
     }else if(regX == "1"){
-        R1 = (parseInt(R1, 2) + parseInt(Imm, 2)).toString(16);
+        if(R1 == undefined || R1 == "-" || R1 == ""){
+            R1 = "0";
+        }
+        R1 = (parseInt(R1, 16) + parseInt(Imm, 2)).toString(16);
     }else if(regX == "10"){
-        R2 = (parseInt(R2, 2) + parseInt(Imm, 2)).toString(16);
+        if(R2 == undefined || R2 == "-" || R2 == ""){
+            R2 = "0";
+        }
+        R2 = ( parseInt(R2, 16) + parseInt(Imm, 2)).toString(16);
     }else if(regX == "11"){
-        R3 = (parseInt(R3, 2) + parseInt(Imm, 2)).toString(16);
+        if(R3 == undefined || R3 == "-" || R3 == ""){
+            R3 = "0";
+        }
+        R3 = ( parseInt(R3, 16) + parseInt(Imm, 2)).toString(16);
     }else{
         console.log("Registrador nao encontrado");
     }
@@ -600,13 +688,25 @@ function addImm(regX, Imm){
 //Funcao que subtrai a um registrador um valor inteiro
 function subImm(regX, Imm){
     if(regX == "0"){
-        R0 = (parseInt(R0, 2) - parseInt(Imm, 2)).toString(16);
+        if(R0 == undefined || R0 == "-" || R0 == ""){
+            R0 = "0";
+        }
+        R0 = (parseInt(R0, 16) - parseInt(Imm, 2)).toString(16);
     }else if(regX == "1"){
-        R1 = (parseInt(R1, 2) - ImparseInt(Imm, 2)).toString(16);
+        if(R1 == undefined || R1 == "-" || R1 == ""){
+            R1 = "0";
+        }
+        R1 = (parseInt(R1, 16) - ImparseInt(Imm, 2)).toString(16);
     }else if(regX == "10"){
-        R2 = (parseInt(R2, 2) - parseInt(Imm, 2)).toString(16);
+        if(R2 == undefined || R2 == "-" || R2 == ""){
+            R2 = "0";
+        }
+        R2 = (parseInt(R2, 16) - parseInt(Imm, 2)).toString(16);
     }else if(regX == "11"){
-        R3 = (parseInt(R3, 2) - parseInt(Imm, 2)).toString(16);
+        if(R3 == undefined || R3 == "-" || R3 == ""){
+            R3 = "0";
+        }
+        R3 = (parseInt(R3, 16) - parseInt(Imm, 2)).toString(16);
     }else{
         console.log("Registrador nao encontrado")
     }
@@ -615,13 +715,25 @@ function subImm(regX, Imm){
 //Funcao que multiplica um registrador e um valor inteiro
 function mulImm(regX, Imm){
     if(regX == "00"){
-        R0 = (parseInt(R0, 2) * parseInt(Imm, 2)).toString(16);
+        if(R0 == undefined || R0 == "-" || R0 == ""){
+            R0 = "0";
+        }
+        R0 = ( parseInt(R0, 16) * parseInt(Imm, 2)).toString(16);
     }else if(regX == "01"){
-        R1 = (parseInt(R1, 2) * ImparseInt(Imm, 2)).toString(16);
+        if(R1 == undefined || R1 == "-" || R1 == ""){
+            R1 = "0";
+        }
+        R1 = ( parseInt(R1, 16) * ImparseInt(Imm, 2)).toString(16);
     }else if(regX == "10"){
-        R2 = (parseInt(R2, 2) * parseInt(Imm, 2)).toString(16);
+        if(R2 == undefined || R2 == "-" || R2 == ""){
+            R2 = "0";
+        }
+        R2 = ( parseInt(R2, 16) * parseInt(Imm, 2)).toString(16);
     }else if(regX == "11"){
-        R3 = (parseInt(R3, 2) * parseInt(Imm, 2)).toString(16);
+        if(R3 == undefined || R3 == "-" || R3 == ""){
+            R3 = "0";
+        }
+        R3 = ( parseInt(R3, 16) * parseInt(Imm, 2)).toString(16);
     }else{
         console.log("Registrador nao encontrado")
     }
@@ -630,13 +742,25 @@ function mulImm(regX, Imm){
 //Funcao que divide um registrador e um valor inteiro
 function divImm(regX, Imm){
     if(regX == "00"){
-        R0 = (parseInt(R0, 2) / parseInt(Imm, 2)).toString(16);
+        if(R0 == undefined || R0 == "-" || R0 == ""){
+            R0 = "0";
+        }
+        R0 = ( parseInt(R0, 16) / parseInt(Imm, 2)).toString(16);
     }else if(regX == "01"){
-        R1 = (parseInt(R1, 2) / ImparseInt(Imm, 2)).toString(16);
+        if(R1 == undefined || R1 == "-" || R1 == ""){
+            R1 = "0";
+        }
+        R1 = ( parseInt(R1, 16) / ImparseInt(Imm, 2)).toString(16);
     }else if(regX == "10"){
-        R2 = (parseInt(R2, 2) / parseInt(Imm, 2)).toString(16);
+        if(R2 == undefined || R2 == "-" || R2 == ""){
+            R2 = "0";
+        }
+        R2 = ( parseInt(R2, 16) / parseInt(Imm, 2)).toString(16);
     }else if(regX == "11"){
-        R3 = (parseInt(R3, 2) / parseInt(Imm, 2)).toString(16);
+        if(R3 == undefined || R3 == "-" || R3 == ""){
+            R3 = "0";
+        }
+        R3 = ( parseInt(R3, 16) / parseInt(Imm, 2)).toString(16);
     }else{
         console.log("Registrador nao encontrado")
     }
@@ -658,50 +782,12 @@ function movRegReg(regX, regY){
         console.log("Registrador nao encontrado")
     }
 }
-/*
-
-var desc = [
-    'Faz o processador terminar o ciclo de instrucao. Deve-se colocar no fim do programa.',
-    'Carrega para o registrador X uma palavra da memoria no endereco Y.',
-    'Armazena no endereco de memoria Y o conteudo do registrador X.',
-    'regX = regY + regZ',
-    'regX = regY - regZ',
-    'regX = regY * regZ',
-    'regX = regY / regZ',
-    'Desloca a palavra no registrador X em imm bits a esquerda.',
-    'Desloca a palavra no registrador X em imm bits a direita.',
-    'Compara a palavra no registrador X com a palavra no registrador Y e preenche os registradores internos E, L e G os valores fazendo sequencialmente os seguintes testes: 1. Se reg0 = reg1, entao E = 1; senao E = 0; 2. Se reg0 < reg1, entao L = 1; senao L = 0; 3. Se reg0 > reg1, entao G = 1; senao G = 0.',
-    'Muda o registrador PC para o endereco de memoria X caso E = 1',
-    'Muda o registrador PC para o endereco de memoria X caso E = 0.',
-    'Muda o registrador PC para o endereco de memoria X caso L = 1.',
-    'Muda o registrador PC para o endereco de memoria X caso E = 1 ou L = 1.',
-    'Muda o registrador PC para o endereco de memoria X caso G = 1.',
-    'Muda o registrador PC para o endereco de memoria X caso E = 1 ou G = 1.',
-    'Muda o registrador PC para o endereco de memoria X.',
-    'Move os 16 bits menos significativos (0:15) do imediato para a parte superior (16:31) do registrador X.',
-    'Move os 16 bits menos significativos (0:15) do imediato para a parte inferior (0:15) do registrador X. Alem disso a parte superior (16:31) do registrador X e zerada.',
-    'regX = regX + imm',
-    'regX = regX - imm',
-    'regX = regX * imm',
-    'regX = regX / imm',
-    'regX = regY'
-];
-
-function documentation(bin2op){
-    var doc = document.getElementById("doc");
-    var el = '';
-    for(var i = 0; i < 24; i++){
-        el += '<div class="row"><div class="input-group col"><div class="input-group-prepend"><span class="input-group-text" >'+ bin2op.get(i.toString(2)) + '</span></div><input class="form-control value" type="text" placeholder="DESC:'+ desc[i] +'" readonly></div></div>'
-        doc.innerHTML = el;
-    }
-}
-*/
 
 //Conjunto de opcodes que usam um registrador
-var opreg1 = ["ld", "st", "lsh", "rsh", "je", "jne", "jl", "jle", "jg", "jge", "jmp", "movih", "movil", "addi", "subi", "muli", "divi"];
+var opreg1 = ["ld", "st", "lsh", "rsh", "movih", "movil", "addi", "subi", "muli", "divi"];
 
 //Conjunto de opcodes que usam IMM
-var opregImm = ["movih", "movil", "addi", "subi", "muli", "divi"];
+var opregImm = [ "lsh", "rsh", "movih", "movil", "addi", "subi", "muli", "divi"];
 
 //Conjunto de opcodes que usam dois registrador
 var opreg2 = ["cmp", "movrr"];
@@ -711,47 +797,58 @@ var opreg3 = ["add", "sub", "mul", "div"];
 
 //Funcao que adiciona as palavras na memoria
 function compile(){
-    PC = "0";
 	var code = document.getElementById("code");
     var btncompile = document.getElementById("btncompile");
     //Pegar codigo em ASCII e converter em binario e salvar na memoria
     btncompile.onclick = function(){
         //Cria um array com cada linha do codigo
-        var str = code.value.split("\n");
-        var wrd = [];
-        var word = "";
-        //Separa espaço e tira as virgulas de cada palavra
-        for(var i = 0; i < str.length; i++){
-            var div = str[i].split(",").join("");
-            for(var j = 0; j < div.split(" ").length; j++){
-                wrd.push(div.split(" ")[j]);
-            }
-            word = "";
-            //Verifica se a palavra eh um Opcode, Registrador ou Inteiro
-            for(var t = 0; t < wrd.length; t++){
-                //Busca palavras no mapa binario
-                if(op2bin.has(wrd[t])){ 
-                    word = op2bin.get(wrd[t]);
-                }else if(reg2bin.has(wrd[t])){
-                    word += reg2bin.get(wrd[t]);
-                }else{
-                    word += addZeroImm(wrd[t]);
-                }
-                //Verifica se eh a ultima palavra da linha ou do codigo todo
-                if(wrd[t+1] == undefined || op2bin.has(wrd[t+1])){
-                    if(word != ""){
-                        while(word.length < 32){
-                            word += "0";
-                        }
-                        //Salva a palavra na memoria
-                        mem[i] = addZeroBin(word);
-                    }
-                    word = "";
-                }
-                memory()
+        var v = code.value.toLowerCase().split("m[").join("").split("]").join("");
+        v = v.split("\n");
+        var str = [];
+        for(var s = 0; s < v.length; s++){
+            if(v[s] != "" && v[s] != undefined && v != ""){
+                str.push(v[s]);
             }
         }
-        
+        if(str != ""){
+            btnrun = document.getElementById("run");
+            btnrun.textContent = "Search";
+            btnrun.disabled = false;
+            regInit();
+            var wrd = [];
+            var word = "";
+            //Separa espaço e tira as virgulas de cada palavra
+            for(var i = 0; i < str.length; i++){
+                var div = str[i].split(",").join("");
+                for(var j = 0; j < div.split(" ").length; j++){
+                    wrd.push(div.split(" ")[j]);
+                }
+                word = "";
+                //Verifica se a palavra eh um Opcode, Registrador ou Inteiro
+                for(var t = 0; t < wrd.length; t++){
+                    //Busca palavras no mapa binario
+                    if(op2bin.has(wrd[t])){ 
+                        word = op2bin.get(wrd[t]);
+                    }else if(reg2bin.has(wrd[t])){
+                        word += reg2bin.get(wrd[t]);
+                    }else{
+                        word += addZeroImm(word, wrd[t]);
+                    }
+                    //Verifica se eh a ultima palavra da linha ou do codigo todo
+                    if(wrd[t+1] == undefined || op2bin.has(wrd[t+1])){
+                        if(word != ""){
+                            while(word.length < 32){
+                                word += "0";
+                            }
+                            //Salva a palavra na memoria
+                            mem[i] = word;
+                        }
+                        word = "";
+                    }
+                    memory()
+                }
+            }
+        }
     };    
 };
 compile();
@@ -759,19 +856,18 @@ compile();
 //Funcao que faz o ciclo da maquina
 function run(){
     var word = "";
-    var p = PC;
     //Verifica se foi feito busca na memoria
     if(srch == false){
         //Reseta os registradores de apontamento
-        MAR = "0";
-        IMM = "0";
-        IR = "0";
-        RO0 = "0";
-        RO1 = "0";
-        RO2 = "0";
+        MAR = "";
+        IMM = "";
+        IR = "";
+        RO0 = "";
+        RO1 = "";
+        RO2 = "";
         //MBR recebe a instrucao da memoria referente a posicao indicada por PC
-        if(p < mem.length){
-            MBR = parseInt(mem[p], 2).toString(16);
+        if(PC < mem.length){
+            MBR = parseInt(mem[PC], 2).toString(16);
             srch = true;
         }else{
             console.log("Position not found on Memory")
@@ -785,6 +881,8 @@ function run(){
                 mb += "0";
             }
             mb += l;
+        }else{
+            mb = l;
         }
         for(var j = 0; j < mb.length; j++){
             word += mb.charAt(j);
@@ -801,9 +899,12 @@ function run(){
             }
             //Verifica se usa IMM ou quantos registradores sao usados cm o opcode em IR
             var found = "0";
-            console.log("IR: "+IR)
-            var l = bin2op.get(hex2bin.get(IR));
-            console.log(l);
+            var ir = "";
+            for(var i = 0; i < (5 - parseInt(IR,16).toString(2).length); i++){
+                ir += "0";
+            }
+            ir += parseInt(IR,16).toString(2);
+            var l = bin2op.get(ir);
             for (var i = 0; i < opreg1.length && found == "0"; i++) {
                 if (opreg1[i] == l) {
                     found = "1";
@@ -827,13 +928,10 @@ function run(){
             //Caso retorne 1 ou IMM, pega o restante da palavra e salva em MAR ou IMM de acordo com o retorno
             if(found == "1" || found == "IMM"){
                 if(j == (mb.length - 1)){
-                    console.log("CHEGUEI");
                     if(found == "IMM"){
-                        console.log("IMM");
                         IMM = parseInt(word, 2).toString(16);
                         word = "";
                     }else{
-                        console.log("MAR");
                         MAR = parseInt(word, 2).toString(16);
                         word = "";
                     }
@@ -854,6 +952,11 @@ function run(){
                     RO2 = parseInt(word, 2).toString(16);
                     word = "";
                 }
+            }else{
+                if(j == (mb.length - 1)){
+                    MAR = parseInt(word, 2).toString(16);
+                    word = "";
+                }
             }
             deco = true;
         }
@@ -865,6 +968,9 @@ function run(){
         }
         ir += parseInt(IR,16).toString(2);
         switch(bin2op.get(ir)){
+            case "hlt":
+                halt();
+                break;
             case "ld":
                 load(parseInt(RO0, 16).toString(2), parseInt(MAR, 16));
                 break;
@@ -938,14 +1044,15 @@ function run(){
         srch = false;
         deco = false;
         //Incrementa PC
-        p += 1;
-        PC = p.toString(2);
+        PC += 1;
 
     }
     //Atualiza os registradores e o botao que roda o programa
     registrator();
     btnrun = document.getElementById("run");
-    if(srch == false){
+    if(btnrun.disabled == true){
+        btnrun.textContent = "Disabled";
+    }else if(srch == false){
         btnrun.textContent = "Search";
     }else if(deco == false){
         btnrun.textContent = "Decodify";

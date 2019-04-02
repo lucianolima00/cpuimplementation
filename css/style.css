@@ -30,6 +30,10 @@ h1{
     margin: 20px;
 }
 
+.card-title{
+	text-align: center;
+}
+
 #code {
     height: 280px;
     overflow: scroll;
@@ -82,12 +86,6 @@ body {
 	background-color: #FEFEFE;
 	color: #111;
 	overflow-x: hidden;
-}
-
-#doc {
-    min-height: 250px;
-    width: 100%;
-    margin: 0;
 }
 
  #memory{
@@ -160,60 +158,6 @@ body .row-footer{
 #navbar-logo{
 	border-radius: 5px;
 }
-#aside-nav{
-	position: absolute;
-	width: 60px;
-	float: right;
-	transition: width 0.5;
-	/* Safari and Chrome*/
-	-webkit-transition: width 0.5s;
-	transition-timing-function: ease;
-	left: 0;
-    height: 100%;
-    overflow-y: hidden;
-	z-index: 2;
-}
-#aside-nav span{
-	visibility: hidden;
-	position: absolute;
-}
-#aside-nav p{
-    font-size: 10pt;
-    margin: 10px;
-    width: 20px;
-    padding: 0 5px;
-}
-#aside-nav a{
-	text-decoration: none;
-    color: #eee;
-    padding: 0;
-}
-#aside-nav a:hover{
-	text-decoration: none;
-	color: #414141;
-}
-#aside-nav li{
-	width: 40px;
-	transition: width 0.5s;
-	/* Safari and Chrome*/
-	-webkit-transition: width 0.5s;
-	transition-timing-function: ease;
-	border-radius: 50px;
-	background-color: #007F42;
-	-moz-box-shadow: 5px 0 0 10px #77777;
-	-webkit-box-shadow: 5px 0 0 10px #77777;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-	margin: 5px;
-    font-size: 14.5px !important;
-}
-#aside-nav li:hover{
-	background-color: #00E36E;
-}
-
-.pg-title, .location{
-	margin-top: unset;
-	margin-bottom: unset;
-}
 .form-label-group input::-webkit-input-placeholder {
 	color: transparent;
 }
@@ -251,12 +195,6 @@ body .row-footer{
 		width: 100%;
 		height: 65px;
 	}
-	#aside-nav{
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 100%;
-	}
 	.wrapper {
 		position: fixed;
 		display: grid;
@@ -264,24 +202,10 @@ body .row-footer{
 		/* Safari and Chrome*/
 		-webkit-transition: padding-left 0.5s;
 		width: 100%;
-		padding-left: 60px;
 	}
 	#navbar-lobo span{
         font-size: 12pt;
     }
-	#aside-nav:hover{
-		text-align: left;
-		width: 160px;
-	}
-	#aside-nav li:hover{
-		width: 150px;
-	}
-	#aside-nav span{
-		margin-left: 15px;
-	}
-	.breadcrumb .col-sm-8, .breadcrumb .col-sm-4{
-		position: unset;
-	}
 	.footer{
 		bottom: 0;
 		transition: padding-left 0.5s,padding-right 0.5s;
@@ -344,12 +268,6 @@ body .row-footer{
 		width: 100%;
 		height: 75px;
 	}
-	#aside-nav{
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 100%;
-	}
 	.wrapper {
 		position: fixed;
 		display: grid;
@@ -387,70 +305,7 @@ body .row-footer{
 		background-color: #565656;
 		text-decoration: none;
 		color: #fff
-	}
-	#aside-nav:hover{
-		text-align: left;
-		width: 160px;
-	}
-	#aside-nav li:hover{
-		width: 150px;
-	}
-	#aside-nav span{
-		margin-left: 15px;
-	}
-	.acc-pict{
-		border-radius: 100px;
-		margin: auto;
-	}
-	.breadcrumb{
-		height: 126px;
-	}
-	.breadcrumb .col-sm-8, .breadcrumb .col-sm-4{
-		position: unset;
-		height: 116px;
-	}
-	.pg-title{
-		text-align: left;
-		font-size: 20pt;
-		margin: auto 24.5px;
-	}
-	.location{
-		font-size: 12pt;
-		margin: auto 40px;
-		text-align: right;
-	}
-
-	.card-signin {
-		border: 0;
-		border-radius: 1rem;
-		box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-	}
-	
-	.card-signin .card-title {
-		margin-bottom: 2rem;
-		font-weight: 300;
-		font-size: 1.5rem;
-	}
-	
-	.card-signin .card-body {
-		padding: 2rem;
-	}
-	
-	.form-signin {
-		width: 100%;
-	}
-	
-	.form-signin .btn {
-		font-size: 80%;
-		border-radius: 5rem;
-		letter-spacing: .1rem;
-		font-weight: bold;
-		padding: 1rem;
-		transition: all 0.2s;
-		height: unset;
-		line-height: unset;
-	}
-	
+	}	
 	.form-label-group {
 		position: relative;
 		margin-bottom: 1rem;
@@ -516,7 +371,6 @@ body .row-footer{
 		/* Safari and Chrome*/
 		-webkit-transition: padding-left 0.5s;
 		width: 100%;
-		padding-left: 60px;
 		height: 75px;
 	}
 	#navbar{
